@@ -18,7 +18,7 @@ export const viewport: Viewport = {
 // 1. GENERAR RUTAS ESTÁTICAS (BUILD TIME)
 export async function generateStaticParams() {
     try {
-        const res = await fetch('http://10.20.20.5/ofertitas_api2/public/offers/feed');
+        const res = await fetch(`${process.env.URL_SERVER}/offers/feed`);
         const companies: Company[] = await res.json();
         return companies.map((company) => ({
             id: String(company.id),
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 // 2. FETCH DE DATOS
 async function getCompanyFeed(id: string): Promise<Offer[]> {
     try {
-        const res = await fetch(`http://10.20.20.5/ofertitas_api2/public/offers/feed/${id}`, { 
+        const res = await fetch(`${process.env.URL_SERVER}/offers/feed/${id}`, { 
             next: { revalidate: 60 } // Cache corto para ofertas flash
         });
         if (!res.ok) return [];
@@ -44,7 +44,7 @@ async function getCompanyFeed(id: string): Promise<Offer[]> {
 
 async function getCompany(id: string): Promise<Company | null> {
     try {
-        const res = await fetch(`http://10.20.20.5/ofertitas_api2/public/companies/${id}`, { 
+        const res = await fetch(`${process.env.URL_SERVER}/companies/${id}`, { 
             next: { revalidate: 3600 } // La info de la empresa cambia menos
         });
         if (!res.ok) return null;
@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             description: '¡No te pierdas estas ofertas antes de que venzan!',
             // Usamos el logo de la empresa como preview si existe
             images: company.logo_url 
-                ? [`http://10.20.20.5/ofertitas_api2/public${company.logo_url}`]
+                ? [`${process.env.URL_SERVER}${company.logo_url}`]
                 : [],
         }
     };

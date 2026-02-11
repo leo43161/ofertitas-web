@@ -36,7 +36,7 @@ export default function OfferListClient({ initialOffers }: { initialOffers: any[
                     <Link href={`/oferta/${offer.id}`} key={offer.id}>
                         {/* ... TU TARJETA ... */}
                         <div className="bg-white rounded-xl shadow border p-2">
-                             <img src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`} className="w-full h-32 object-cover rounded" />
+                             <img src={`${ process.env.URL_SERVER}${offer.image_url}`} className="w-full h-32 object-cover rounded" />
                              <p className="font-bold mt-2 truncate">{offer.title}</p>
                              <p className="text-blue-600 font-bold">${offer.price_offer}</p>
                         </div>

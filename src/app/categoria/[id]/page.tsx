@@ -24,7 +24,7 @@ interface Offer {
 // Next.js preguntará: "¿Cuántas categorías existen?" y creará un HTML para cada una.
 export async function generateStaticParams() {
   try {
-    const res = await fetch('http://10.20.20.5/ofertitas_api2/public/categories');
+    const res = await fetch(`${process.env.URL_SERVER}/categories`);
     const categories: Category[] = await res.json();
     return categories.map((cat) => ({
       id: String(cat.id),
@@ -38,7 +38,7 @@ export async function generateStaticParams() {
 // Helper para traer info de la categoría
 async function getCategory(id: string): Promise<Category | null> {
   try {
-    const res = await fetch('http://10.20.20.5/ofertitas_api2/public/categories');
+    const res = await fetch( `${process.env.URL_SERVER}/categories`);
     const categories: Category[] = await res.json();
     return categories.find(c => String(c.id) === id) || null;
   } catch (error) {
@@ -50,7 +50,7 @@ async function getCategory(id: string): Promise<Category | null> {
 async function getOffersByCategory(id: string): Promise<Offer[]> {
   try {
     // Usamos el filtro que ya programamos en el Backend: ?category_id=X
-    const res = await fetch(`http://10.20.20.5/ofertitas_api2/public/offers?category_id=${id}`);
+    const res = await fetch( `${process.env.URL_SERVER}/offers?category_id=${id}`);
     const offers: Offer[] = await res.json();
     return offers;
   } catch (error) {
@@ -115,7 +115,7 @@ export default async function CategoryPage({ params }: Props) {
                         <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md transition-all h-full flex flex-col">
                             <div className="aspect-4/3 bg-gray-200 relative">
                                 <img 
-                                    src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`} 
+                                    src={`${process.env.URL_SERVER}${offer.image_url}`} 
                                     alt={offer.title} 
                                     className="w-full h-full object-cover"
                                     loading="lazy"

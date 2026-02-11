@@ -24,7 +24,7 @@ export default function StoriesRail() {
               <div className={`w-16 h-16 rounded-full p-[3px] shadow-hard transition-transform group-hover:scale-110 group-hover:shadow-hard-xl ${isFlash ? 'bg-linear-to-br from-orange-light via-red-light to-red animate-flash-ring' : 'bg-linear-to-br from-red-light to-orange-light'}`}>
                 <div className="w-full h-full rounded-full bg-cream-dark border-[2.5px] border-cream flex items-center justify-center overflow-hidden">
                    <img 
-                      src={item.company_logo ? `http://10.20.20.5/ofertitas_api2/public${item.company_logo}` : 'https://placehold.co/100x100/orange/white?text=' + item.company_name.substring(0,2)} 
+                      src={item.company_logo ? `${process.env.URL_SERVER}${item.company_logo}` : 'https://placehold.co/100x100/orange/white?text=' + item.company_name.substring(0,2)} 
                       alt={item.company_name}
                       className="w-full h-full object-cover"
                    />

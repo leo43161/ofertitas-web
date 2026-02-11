@@ -55,7 +55,7 @@ export default function HeroBanner({ offers }: { offers?: Offer[] }) {
         {/* Imagen Hero (Corte diagonal o flotante) */}
         <div className="hidden sm:flex relative w-60 h-full items-center justify-center shrink-0 pr-4">
             <img 
-                src={`http://10.20.20.5/ofertitas_api2/public${heroOffer.image_url}`} 
+                src={`${process.env.URL_SERVER}${heroOffer.image_url}`} 
                 className="rounded-xl rotate-3 border-4 border-white/20 shadow-2xl max-h-[180px] object-cover" 
                 alt={heroOffer.title} 
             />

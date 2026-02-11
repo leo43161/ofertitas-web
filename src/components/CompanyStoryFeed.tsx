@@ -12,7 +12,7 @@ export default function CompanyStoryFeed({ companyId }: { companyId: string }) {
 
     useEffect(() => {
         // Asumiendo que configuraste la ruta en tu API
-        fetch(`http://10.20.20.5/ofertitas_api2/public/offers/${companyId}/feed`)
+        fetch(`${process.env.URL_SERVER}/offers/${companyId}/feed`)
             .then(res => res.json())
             .then(data => {
                 setOffers(data);
@@ -37,7 +37,7 @@ export default function CompanyStoryFeed({ companyId }: { companyId: string }) {
                     <div className="h-64 relative">
                          {/* Usa tu componente de Imagen optimizado aquí si tienes */}
                         <img 
-                            src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`} 
+                            src={`${process.env.URL_SERVER}${offer.image_url}`} 
                             alt={offer.title} 
                             className="w-full h-full object-cover"
                         />

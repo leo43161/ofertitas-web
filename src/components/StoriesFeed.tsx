@@ -78,7 +78,7 @@ const StoryItem = ({ offer, index }: { offer: Offer; index: number }) => {
                 transition={{ duration: 10, ease: "linear" }}
             >
                 <img
-                    src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`}
+                    src={`${process.env.URL_SERVER}${offer.image_url}`}
                     alt={offer.title}
                     className={`w-full h-full object-cover ${isExpired ? 'grayscale' : ''}`}
                 />

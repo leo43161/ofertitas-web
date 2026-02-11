@@ -4,13 +4,16 @@ const nextConfig: NextConfig = {
   output: 'export', // <--- LA CLAVE PARA ESTÁTICO
   images: {
     unoptimized: true, // Importante: Next/Image sin servidor no funciona por defecto
-    remotePatterns: [
+    /* remotePatterns: [
       {
         protocol: 'http',
         hostname: '10.20.20.5', // O tu IP pública
         pathname: '/ofertitas_api2/public/**',
       },
-    ],
+    ], */
+  },
+  env: {
+    URL_SERVER: process.env.NODE_ENV === 'production' ? "" : "https://ofertitas.leonardo-dev.website/api/public",
   },
   // Desactivar trailing slash ayuda con algunos hostings estáticos
   trailingSlash: true,

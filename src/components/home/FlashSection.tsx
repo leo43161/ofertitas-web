@@ -19,7 +19,7 @@ export default function FlashSection({ offers }: { offers?: Offer[] }) {
         {flashOffers.map(offer => (
           <Link key={offer.id} href={`/oferta/${offer.id}`} className="flex-none w-[150px] bg-white/10 rounded-xl overflow-hidden border border-white/10 transition-transform hover:-translate-y-1 hover:bg-white/15">
              <div className="h-[90px] bg-black/20 flex items-center justify-center overflow-hidden">
-                <img src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`} className="w-full h-full object-cover" alt={offer.title} />
+                <img src={`${process.env.URL_SERVER}${offer.image_url}`} className="w-full h-full object-cover" alt={offer.title} />
              </div>
              <div className="p-2.5">
                 <div className="text-white text-xs font-bold truncate mb-1">{offer.title}</div>

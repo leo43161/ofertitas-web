@@ -33,7 +33,7 @@ const PromoBadge = ({ type }: { type: string }) => {
 // 1. GENERAR RUTAS ESTÁTICAS
 export async function generateStaticParams() {
     try {
-        const res = await fetch('http://10.20.20.5/ofertitas_api2/public/offers');
+        const res = await fetch(`${process.env.URL_SERVER}/offers`);
         const offers: Offer[] = await res.json();
         return offers.map((offer) => ({
             id: String(offer.id),
@@ -47,7 +47,7 @@ export async function generateStaticParams() {
 // 2. FETCH DE DATOS
 async function getOffer(id: string): Promise<Offer | null> {
     try {
-        const res = await fetch(`http://10.20.20.5/ofertitas_api2/public/offers/${id}`, { next: { revalidate: 60 } });
+        const res = await fetch(`${process.env.URL_SERVER}/offers/${id}`, { next: { revalidate: 60 } });
         if (!res.ok) return null;
         return res.json();
     } catch (error) {
@@ -69,7 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: `${offer.title} | ${offer.discount_text}`,
         description: `Consigue ${offer.title} en ${offer.company_name} por $${offer.price_offer}.`,
         openGraph: {
-            images: [`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`]
+            images: [`${process.env.URL_SERVER}${offer.image_url}`]
         }
     };
 }
@@ -109,7 +109,7 @@ export default async function OfferPage({ params }: Props) {
                 {/* --- COLUMNA IZQUIERDA: IMAGEN --- */}
                 <div className="relative w-full md:w-1/2 h-80 md:h-auto bg-cream-dark border-r-0 md:border-r-4 border-white/50">
                     <img
-                        src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`}
+                        src={`${process.env.URL_SERVER}${offer.image_url}`}
                         alt={offer.title}
                         className={`w-full h-full object-cover transition-all ${isExpired ? 'grayscale contrast-125' : ''}`}
                     />

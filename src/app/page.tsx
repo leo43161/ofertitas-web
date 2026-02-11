@@ -73,7 +73,7 @@ export default function Home() {
                  <Link href={`/oferta/${offer.id}`} key={offer.id} className="bg-white rounded-[14px] overflow-hidden shadow-hard border-2 border-transparent transition-all hover:-translate-y-1 hover:shadow-hard-xl hover:border-red/20 group">
                     <div className="relative h-[155px] bg-cream-dark overflow-hidden">
                         <img 
-                           src={`http://10.20.20.5/ofertitas_api2/public${offer.image_url}`} 
+                           src={ `${process.env.URL_SERVER}${offer.image_url}`} 
                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" 
                            alt={offer.title} 
                         />

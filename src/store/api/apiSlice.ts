@@ -8,7 +8,7 @@ export interface OfferFilters {
 }
 
 // --- API REAL (Tu código original) ---
-const API_URL = 'http://10.20.20.5/ofertitas_api2/public'; 
+const API_URL = process.env.URL_SERVER; 
 const API_KEY = 'ofertita-x-2-5-2-6-3';
 
 const realBaseQuery = fetchBaseQuery({
