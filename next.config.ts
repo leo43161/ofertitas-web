@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     ], */
   },
   env: {
-    URL_SERVER: process.env.NODE_ENV === 'production' ? "" : "https://ofertitas.leonardo-dev.website/api/public",
+    URL_SERVER: process.env.NODE_ENV === 'production' ? "https://ofertitas.leonardo-dev.website/api/public" : "http://localhost/ofertitas_api2/public",
   },
   // Desactivar trailing slash ayuda con algunos hostings estáticos
   trailingSlash: true,
