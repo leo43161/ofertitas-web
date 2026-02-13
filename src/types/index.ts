@@ -35,7 +35,6 @@ export type Offer = {
   longitude: string; // Alias de l.longitude (Decimal suele ser string)
   
   company_name: string;      // Alias de c.name
-  company_logo: string | null; // Alias de c.logo_url
   
   category_name: string;     // Alias de cat.name
   category_icon: string;     // Alias de cat.name
@@ -43,6 +42,11 @@ export type Offer = {
   promo_type: 'regular' | 'flash' | 'day' | 'week' | 'custom';
   start_date: string | null;
   end_date: string | null;
+
+  distance_text?: string;       // Ej: "450 m" o "1.2 km"
+  time_remaining_text?: string; // Ej: "Termina en 2h 15m"
+  is_ending_soon?: boolean;     // Ej: true (para ponerlo rojo/fuego)
+  company_logo?: string;
 };
 
 export interface CompanyActivity {

@@ -113,7 +113,7 @@ export default async function CompanyStoriesPage({ params }: Props) {
 
                 <Link 
                     href="/" 
-                    className="flex items-center gap-2 bg-red text-white px-8 py-3 rounded-2xl font-bangers text-xl shadow-[4px_4px_0px_#922B21] active:translate-y-[2px] active:shadow-[2px_2px_0px_#922B21] transition-all"
+                    className="flex items-center gap-2 bg-red text-white px-8 py-3 rounded-2xl font-bangers text-xl shadow-[4px_4px_0px_#922B21] active:translate-y-0.5 active:shadow-[2px_2px_0px_#922B21] transition-all"
                 >
                     <ArrowLeft className="w-5 h-5" /> Volver al Inicio
                 </Link>
@@ -123,7 +123,7 @@ export default async function CompanyStoriesPage({ params }: Props) {
 
     // Caso Éxito: Renderizamos el Feed
     return (
-        <main className="h-[100dvh] w-full bg-black overflow-hidden">
+        <main className="h-dvh w-full bg-black overflow-hidden">
              {/* Pasamos offers y companyId para lógica interna */}
             <StoriesFeed offers={offers} />
         </main>

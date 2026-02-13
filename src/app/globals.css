@@ -7,20 +7,41 @@
   --font-nunito: var(--font-nunito);
 
   /* Colores del Diseño HTML */
-  --color-red: #C0392B;
-  --color-red-dark: #922B21;
-  --color-red-light: #E74C3C;
-  --color-cream: #FDF6E3;
-  --color-cream-dark: #F5E6C8;
-  --color-orange: #E67E22;
-  --color-orange-light: #F39C12;
-  --color-green: #27AE60;
-  --color-text-dark: #1a1a1a;
-  --color-text-mid: #4a3728;
+  --color-flash: var(--flash);
+  --color-flash-dark: var(--flash-dark);
+  --color-flash-light: var(--flash-light);
+  --color-red: var(--red);
+  --color-red-dark: var(--red-dark);
+  --color-red-light: var(--red-light);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-orange: var(--orange);
+  --color-orange-light: var(--orange-light);
+  --color-green: var(--green);
+  --color-text-dark: var(--text-dark);
+  --color-text-mid: var(--text-mid);
 
   /* Sombras Duras (Hard Shadows) */
   --shadow-hard: 3px 3px 0 rgba(0,0,0,0.22);
   --shadow-hard-xl: 5px 5px 0 rgba(0,0,0,0.28);
+}
+
+@layer utilities {
+  :root {
+    --flash: #FFE600;
+    --flash-dark: #FFD600;
+    --flash-light: #FFF176;
+    --red: #C0392B;
+    --red-dark: #922B21;
+    --red-light: #E74C3C;
+    --cream: #FDF6E3;
+    --cream-dark: #F5E6C8;
+    --orange: #E67E22;
+    --orange-light: #F39C12;
+    --green: #27AE60;
+    --text-dark: #1a1a1a;
+    --text-mid: #4a3728;
+  }
 }
 
 /* Estilos base para reset */
@@ -52,4 +73,50 @@ body {
 }
 .animate-shimmer {
   animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+.animate-shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+/* El shimmer (brillo que pasa) para las fotos */
+@keyframes shimmer {
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
+}
+.animate-shimmer {
+  animation: shimmer 2s infinite linear;
+}
+
+/* Fondo animado para la sección Flash */
+@keyframes gradient-x {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 5s ease infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Onda expansiva para ofertas Flash (Radioactiva) */
+@keyframes ripple {
+  0% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 0 0 rgba(255, 230, 0, 0.7); }
+  70% { transform: scale(1.15); opacity: 0; box-shadow: 0 0 0 10px rgba(255, 230, 0, 0); }
+  100% { transform: scale(1); opacity: 0; }
+}
+.animate-ripple {
+  animation: ripple 2s infinite cubic-bezier(0, 0.2, 0.8, 1);
 }

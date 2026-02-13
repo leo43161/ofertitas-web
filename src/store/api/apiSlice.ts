@@ -35,8 +35,16 @@ export const apiSlice = createApi({
     getFeaturedOffers: builder.query<Offer[], void>({
       query: () => 'offers?featured=true',
     }),
-    getAllOffers: builder.query<Offer[], void>({
-      query: () => 'offers',
+    getAllOffers: builder.query<Offer[], { lat?: number; lng?: number } | void>({
+      query: (coords) => {
+        if (coords && coords.lat && coords.lng) {
+          // Si tenemos coordenadas, llamamos al modo Discovery
+          return `offers?lat=${coords.lat}&lng=${coords.lng}`;
+        }
+        // Si no, listado normal
+        return 'offers';
+      },
+      providesTags: ['Offer'],
     }),
     getOffers: builder.query<Offer[], OfferFilters | void>({
       query: (params) => {

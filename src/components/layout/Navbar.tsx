@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className="bg-red sticky top-0 z-50 h-[60px] px-5 flex items-center justify-between shadow-[0_3px_0_var(--color-red-dark)]">
       {/* Logo Bangers */}
       <Link href="/">
-        <div className="font-bangers text-[2.2rem] text-white tracking-[2px] drop-shadow-[3px_3px_0_var(--color-red-dark)] cursor-pointer">
+        <div className="font-bangers text-[2.2rem] text-white tracking-0.5 drop-shadow-[3px_3px_0_var(--color-red-dark)] cursor-pointer">
           Ofertitas
         </div>
       </Link>
@@ -15,7 +15,7 @@ export default function Navbar() {
       {/* Enlaces Desktop */}
       <div className="hidden md:flex gap-6 items-center">
         {['Categorías', 'Ofertas', 'Mapa', 'Contacto'].map((item) => (
-          <a key={item} href="#" className="text-white/90 no-underline font-bold text-sm tracking-[1.5px] uppercase transition-colors hover:text-[#FFE082]">
+          <a key={item} href="#" className="text-white/90 no-underline font-bold text-sm tracking-[1.5px] uppercase transition-colors hover:text-flash">
             {item}
           </a>
         ))}
@@ -30,7 +30,7 @@ export default function Navbar() {
                 placeholder="🔍  Buscar..." 
             />
         </div>
-        <button className="bg-white text-red border-none rounded-[20px] py-1.5 px-4 font-nunito font-extrabold text-sm cursor-pointer shadow-[2px_2px_0_var(--color-red-dark)] transition-transform hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[3px_3px_0_var(--color-red-dark)] flex items-center gap-2">
+        <button className="bg-white text-red border-none rounded-[20px] py-1.5 px-4 font-nunito font-extrabold text-sm cursor-pointer shadow-[2px_2px_0_var(--color-red-dark)] transition-transform hover:-translate-x-px hover:-translate-y-px hover:shadow-[3px_3px_0_var(--color-red-dark)] flex items-center gap-2">
             <User size={16} /> LOGIN
         </button>
       </div>

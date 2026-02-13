@@ -4,69 +4,69 @@ import Link from 'next/link';
 import { Phone, MapPin } from 'lucide-react';
 
 export default function HeroBanner({ offers }: { offers?: Offer[] }) {
-  // Buscar la mejor oferta para el Hero
-  const heroOffer = offers?.find(o => o.is_featured === 1) || offers?.[0];
+    // Buscar la mejor oferta para el Hero
+    const heroOffer = offers?.find(o => o.is_featured === 1) || offers?.[0];
+    console.log('Hero Offer:', heroOffer);
+    if (!heroOffer) return null;
 
-  if (!heroOffer) return null;
+    const mapLink = heroOffer.latitude && heroOffer.longitude
+        ? `https://www.google.com/maps/search/?api=1&query=${heroOffer.latitude},${heroOffer.longitude}`
+        : '#';
 
-  const mapLink = heroOffer.latitude && heroOffer.longitude
-    ? `https://www.google.com/maps/search/?api=1&query=${heroOffer.latitude},${heroOffer.longitude}`
-    : '#';
+    const whatsappLink = heroOffer.phone
+        ? `https://wa.me/${heroOffer.phone}?text=Hola, vi la oferta ${heroOffer.title} en Ofertitas`
+        : '#';
 
-  const whatsappLink = heroOffer.phone 
-    ? `https://wa.me/${heroOffer.phone}?text=Hola, vi la oferta ${heroOffer.title} en Ofertitas`
-    : '#';
+    return (
+        <div className="px-4 py-4">
+            <div className="relative rounded-2xl overflow-hidden min-h-[220px] flex items-center shadow-hard-xl border-[3px] border-white/10 bg-linear-to-br from-[#1a0a06] via-[#3d1008] to-red">
 
-  return (
-    <div className="px-4 py-4">
-      <div className="relative rounded-2xl overflow-hidden min-h-[220px] flex items-center shadow-hard-xl border-[3px] border-white/10 bg-linear-to-br from-[#1a0a06] via-[#3d1008] to-[#C0392B]">
-        
-        {/* Contenido Texto */}
-        <div className="relative z-10 p-7 flex-1">
-          <div className="inline-block font-bangers text-sm tracking-[2px] px-3 py-1 rounded-[20px] mb-2 shadow-sm bg-red text-white animate-flash-ring">
-             {heroOffer.promo_type === 'flash' ? '⚡ FLASH' : '🔥 DESTACADO'}
-          </div>
-          
-          <h2 className="font-bangers text-[2.5rem] text-white leading-none tracking-[1px] drop-shadow-md mb-1">
-            {heroOffer.title}
-          </h2>
-          
-          <div className="text-white/65 text-sm font-semibold mb-3.5 flex items-center gap-1">
-             <MapPin size={14} /> {heroOffer.company_name}
-          </div>
+                {/* Contenido Texto */}
+                <div className="relative z-10 p-7 flex-1">
+                    <div className="inline-block font-bangers text-sm tracking-0.5 px-3 py-1 rounded-[20px] mb-2 shadow-sm bg-red text-white animate-flash-ring">
+                        {heroOffer.promo_type === 'flash' ? '⚡ FLASH' : '🔥 DESTACADO'}
+                    </div>
 
-          <div className="flex items-baseline gap-3 mb-4">
-            <div className="font-bangers text-[2.6rem] text-[#FFE082] drop-shadow-md leading-none">
-              ${Number(heroOffer.price_offer).toLocaleString()}
+                    <h2 className="font-bangers text-[2.5rem] text-white leading-none tracking-px drop-shadow-md mb-1">
+                        {heroOffer.title}
+                    </h2>
+
+                    <div className="text-white/65 text-sm font-semibold mb-3.5 flex items-center gap-1">
+                        <MapPin size={14} /> {heroOffer.company_name}
+                    </div>
+
+                    <div className="flex items-baseline gap-3 mb-4">
+                        <div className="font-bangers text-[2.6rem] text-flash drop-shadow-md leading-none">
+                            ${Number(heroOffer.price_offer).toLocaleString()}
+                        </div>
+                        {Number(heroOffer.price_normal) > Number(heroOffer.price_offer) && (
+                            <div className="text-base text-white/45 line-through decoration-white/45">
+                                ${Number(heroOffer.price_normal).toLocaleString()}
+                            </div>
+                        )}
+                    </div>
+
+                    <a href={whatsappLink} target="_blank" className="relative overflow-hidden inline-flex items-center gap-2 bg-[#25D366] text-white border-none rounded-full py-2.5 px-5 font-nunito font-extrabold text-sm shadow-hard transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-xl group">
+                        <div className="absolute top-[-50%] left-[-60%] w-[30%] h-[200%] bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
+                        <Phone size={16} fill="white" /> Pedir por WhatsApp
+                    </a>
+                </div>
+
+                {/* Imagen Hero (Corte diagonal o flotante) */}
+                <div className="hidden sm:flex relative w-60 h-full items-center justify-center shrink-0 pr-4">
+                    <img
+                        src={`${process.env.URL_SERVER}${heroOffer.image_url}`}
+                        className="rounded-xl rotate-3 border-4 border-white/20 shadow-2xl max-h-[180px] object-cover"
+                        alt={heroOffer.title}
+                    />
+                    <div className="absolute top-4 right-4 bg-black/50 border border-white/20 rounded-lg p-2 backdrop-blur-sm flex flex-col items-center">
+                        <span className="text-white/60 text-[0.6rem] font-bold uppercase tracking-wider">Vence en</span>
+                        <span className="font-bangers text-xl text-flash tracking-wide leading-none">23:14:07</span>
+                    </div>
+                </div>
             </div>
-            {Number(heroOffer.price_normal) > Number(heroOffer.price_offer) && (
-                 <div className="text-base text-white/45 line-through decoration-white/45">
-                    ${Number(heroOffer.price_normal).toLocaleString()}
-                 </div>
-            )}
-          </div>
-
-          <a href={whatsappLink} target="_blank" className="relative overflow-hidden inline-flex items-center gap-2 bg-[#25D366] text-white border-none rounded-full py-2.5 px-5 font-nunito font-extrabold text-sm shadow-hard transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-hard-xl group">
-             <div className="absolute top-[-50%] left-[-60%] w-[30%] h-[200%] bg-white/30 skew-x-[-20deg] animate-shimmer"></div>
-             <Phone size={16} fill="white" /> Pedir por WhatsApp
-          </a>
         </div>
-
-        {/* Imagen Hero (Corte diagonal o flotante) */}
-        <div className="hidden sm:flex relative w-60 h-full items-center justify-center shrink-0 pr-4">
-            <img 
-                src={`${process.env.URL_SERVER}${heroOffer.image_url}`} 
-                className="rounded-xl rotate-3 border-4 border-white/20 shadow-2xl max-h-[180px] object-cover" 
-                alt={heroOffer.title} 
-            />
-             <div className="absolute top-4 right-4 bg-black/50 border border-white/20 rounded-lg p-2 backdrop-blur-sm flex flex-col items-center">
-                <span className="text-white/60 text-[0.6rem] font-bold uppercase tracking-wider">Vence en</span>
-                <span className="font-bangers text-xl text-[#FFE082] tracking-wide leading-none">23:14:07</span>
-             </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
 /* 'use client';
 
